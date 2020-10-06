@@ -1,5 +1,6 @@
 package javaio;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -73,6 +74,25 @@ public class FileReaderTest {
         return retSB.toString();
     }
 
+    public static ArrayList<String> readBufferedReader(String fileName) throws Exception{
+
+        ArrayList<String> list = new ArrayList<>();
+        BufferedReader br = null;
+
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+            String data;
+            while((data = br.readLine()) != null) {
+                list.add(data);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (br != null) br.close();
+        }
+        return list;
+    }
+
 
     public static void main(String[] args) throws Exception{
 
@@ -90,6 +110,13 @@ public class FileReaderTest {
         long time2 = end2 - start2;
         System.out.println(time2);
         System.out.println(list2.length());
+
+        long start3 = System.currentTimeMillis();
+        ArrayList list3 = FileReaderTest.readBufferedReader(fileName);
+        long end3 = System.currentTimeMillis();
+        long time3 = end3 - start3;
+        System.out.println(time3);
+        System.out.println(list3.size());
 
     }
 
