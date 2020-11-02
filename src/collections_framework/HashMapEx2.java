@@ -1,38 +1,40 @@
 package collections_framework;
 
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class HashMapEx2 {
     public static void main(String[] args) {
         HashMap map = new HashMap();
-        map.put("myId", "1234");
-        map.put("asdf", "1111");
-        map.put("asdf", "1234");
+        map.put("김자바", new Integer(90));
+        map.put("김자바", new Integer(100));
+        map.put("이자바", new Integer(100));
+        map.put("강자바", new Integer(80));
+        map.put("안자바", new Integer(90));
 
-        Scanner s = new Scanner(System.in);
+        Set set = map.entrySet();
+        Iterator it = set.iterator();
 
-        while (true) {
-            System.out.println("id와 password를 입력해주세요.");
-            System.out.print("id : ");
-            String id = s.nextLine().trim();
-
-            System.out.print("password : ");
-            String password = s.nextLine().trim();
-            System.out.println();
-
-            if (!map.containsKey(id)) {
-                System.out.println("입력하신 id는 존재하지 않습니다." + " 다시 입력해주세요.");
-
-                continue;
-            } else {
-                if (!(map.get(id)).equals(password)) {
-                    System.out.println("비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
-                }else {
-                    System.out.println("id와 비밀번호가 일치합니다.");
-                    break;
-                }
-            }
+        while (it.hasNext()) {
+            Map.Entry e = (Map.Entry)it.next();
+            System.out.println("이름 : " + e.getKey() + ", 점수 : " + e.getValue());
         }
+
+        set = map.keySet();
+        System.out.println("참가자 명단 : " + set);
+
+        Collection values = map.values();
+        it = values.iterator();
+
+        int total = 0;
+
+        while (it.hasNext()) {
+            Integer i = (Integer)it.next();
+            total += i.intValue();
+        }
+
+        System.out.println("총점 : " + total);
+        System.out.println("평균 : " + (float)total/set.size());
+        System.out.println("최고점수 : " + Collections.max(values));
+        System.out.println("최저점수 : " + Collections.min(values));
     }
 }
