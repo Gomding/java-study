@@ -38,6 +38,8 @@ public class ArrayListEx1 {
 
         print(list1, list2);
 
+        int a = (Integer)list1.get(1);
+
         // list2에서 list1에 포함된 객체들을 삭제한다.
         for (int i = list2.size() - 1; i >= 0; i--) {
             if (list1.contains(list2.get(i))) {
